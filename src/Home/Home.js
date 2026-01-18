@@ -8,6 +8,13 @@ function Home(){
     const [nextUrl, setNextUrl] = useState("https://pokeapi.co/api/v2/pokemon");
 
     const totalPages= 52;
+    const pagesPerGroup = 10;
+    const currentGroup = Math.ceil(currentPage/pagesPerGroup);
+    const startPage = (currentGroup - 1) * pagesPerGroup + 1;
+    const endPage = Math.min(
+        startPage+pagesPerGroup - 1,
+        totalPages
+    );
 
     const getPokeMon = async(page) => {
         const offset = (page-1)*20;
@@ -24,25 +31,41 @@ function Home(){
 
      return (
     <>
-      <ul>
+        <ul>
         {pokemons.map(p => (
-          <li key={p.name}>{p.name}</li>
+            <li key={p.name}>{p.name}</li>
         ))}
-      </ul>
+        </ul>
 
-      <div>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-          <button
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            style={{
-              fontWeight: page === currentPage ? "bold" : "normal"
-            }}
-          >
-            {page}
-          </button>
-        ))}
-      </div>
+        <div>
+            {startPage > 1 && (
+                <button onClick={() => setCurrentPage(startPage - 1)}>
+                ◀
+                </button>
+            )}
+
+            {Array.from(
+                { length: endPage - startPage + 1 },
+                (_, i) => startPage + i
+            ).map(page => (
+                <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                style={{
+                    color : page === currentPage ? "red" : "black",
+                    fontWeight: page === currentPage ? "bold" : "normal"
+                }}
+                >
+                {page}
+                </button>
+            ))}
+
+            {endPage < totalPages && (
+                <button onClick={() => setCurrentPage(endPage + 1)}>
+                ▶
+                </button>
+            )}
+        </div>
     </>
   );
 }
