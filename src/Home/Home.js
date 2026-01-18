@@ -5,7 +5,6 @@ function Home(){
     const [loading, setLoading] =useState(false);
     const [pokemons, setPokemons] = useState([]);
     const [currentPage,setCurrentPage]=useState(1);
-    const [nextUrl, setNextUrl] = useState("https://pokeapi.co/api/v2/pokemon");
 
     const totalPages= 52;
     const pagesPerGroup = 10;
@@ -16,14 +15,40 @@ function Home(){
         totalPages
     );
 
-    const getPokeMon = async(page) => {
-        const offset = (page-1)*20;
+    const getPokeMon = async (page) => {
+        const offset = (page - 1) * 20;
         setLoading(true);
-        
-        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}`);
-        setPokemons(res.data.results);
-        console.log(res.data.results);
-    }
+
+        try {
+            const res = await axios.get(
+            `https://pokeapi.co/api/v2/pokemon?offset=${offset}`
+            );
+
+            const detailPromises = res.data.results.map(p =>
+            axios.get(p.url)
+            );
+
+            const detailResponses = await Promise.all(detailPromises);
+
+            const mappedPokemons = detailResponses.map(r => ({
+            id: r.data.id,
+            name: r.data.name,
+            types: r.data.types.map(t => t.type.name),
+            height: r.data.height / 10,
+            weight: r.data.weight / 10,
+            abilities: r.data.abilities.map(a => a.ability.name),
+            image:
+                r.data.sprites.other["official-artwork"].front_default
+                || r.data.sprites.front_default
+            }));
+
+            setPokemons(mappedPokemons);
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(()=>{
         getPokeMon(currentPage);
