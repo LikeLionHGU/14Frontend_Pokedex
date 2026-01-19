@@ -1,96 +1,77 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-function Home(){
-    const [loading, setLoading] =useState(false);
-    const [pokemons, setPokemons] = useState([]);
-    const [currentPage,setCurrentPage]=useState(1);
+function Home() {
+  const [loading, setLoading] = useState(false);
+  const [songs, setSongs] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const totalPages= 52;
-    const pagesPerGroup = 10;
-    const currentGroup = Math.ceil(currentPage/pagesPerGroup);
-    const startPage = (currentGroup - 1) * pagesPerGroup + 1;
-    const endPage = Math.min(
-        startPage+pagesPerGroup - 1,
-        totalPages
-    );
+  // ✅ 페이지 고정
+  const pageSize = 50;
+  const totalPages = 4;
 
-    const getPokeMon = async (page) => {
-        const offset = (page - 1) * 20;
-        setLoading(true);
+  // ✅ iTunes RSS에서 데이터 한 번만 가져오기
+  const getTopSongs = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
+        "https://itunes.apple.com/us/rss/topsongs/limit=50/json"
+      );
 
-        try {
-            const res = await axios.get(
-            `https://pokeapi.co/api/v2/pokemon?offset=${offset}`
-            );
+      // feed.entry = 배열 (Top 50)
+      setSongs(res.data.feed.entry);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+  console.log("songs length:", songs.length);
 
-            const detailPromises = res.data.results.map(p =>
-            axios.get(p.url)
-            );
+  useEffect(() => {
+    getTopSongs();
+  }, []);
 
-            const detailResponses = await Promise.all(detailPromises);
+  // ✅ 현재 페이지에 보여줄 곡 계산
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
 
-            const mappedPokemons = detailResponses.map(r => ({
-            id: r.data.id,
-            name: r.data.name,
-            types: r.data.types.map(t => t.type.name),
-            height: r.data.height / 10,
-            weight: r.data.weight / 10,
-            abilities: r.data.abilities.map(a => a.ability.name),
-            image:
-                r.data.sprites.other["official-artwork"].front_default
-                || r.data.sprites.front_default
-            }));
+  const currentSongs = songs.slice(startIndex, endIndex);
 
-            setPokemons(mappedPokemons);
-        } catch (e) {
-            console.error(e);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(()=>{
-        getPokeMon(currentPage);
-    },[currentPage]);
-
-     return (
+  return (
     <>
-        <ul>
-        {pokemons.map(p => (
-            <li key={p.name}>{p.name}</li>
+      <h2>
+        {currentPage === 1 && "1 ~ 50"}
+        {currentPage === 2 && "51 ~ 100"}
+        {currentPage === 3 && "101 ~ 150"}
+        {currentPage === 4 && "151 ~ 200"}
+      </h2>
+
+      {loading && <p>로딩중...</p>}
+
+      <ul>
+        {currentSongs.map((song, index) => (
+          <li key={index}>
+            {startIndex + index + 1}. {song["im:name"].label}
+          </li>
         ))}
-        </ul>
+      </ul>
 
-        <div>
-            {startPage > 1 && (
-                <button onClick={() => setCurrentPage(startPage - 1)}>
-                ◀
-                </button>
-            )}
-
-            {Array.from(
-                { length: endPage - startPage + 1 },
-                (_, i) => startPage + i
-            ).map(page => (
-                <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                style={{
-                    color : page === currentPage ? "red" : "black",
-                    fontWeight: page === currentPage ? "bold" : "normal"
-                }}
-                >
-                {page}
-                </button>
-            ))}
-
-            {endPage < totalPages && (
-                <button onClick={() => setCurrentPage(endPage + 1)}>
-                ▶
-                </button>
-            )}
-        </div>
+      <div>
+        {[1, 2, 3, 4].map((page) => (
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            style={{
+              color: page === currentPage ? "red" : "black",
+              fontWeight: page === currentPage ? "bold" : "normal",
+              marginRight: "5px"
+            }}
+          >
+            {page * 50 - 49}~{page * 50}
+          </button>
+        ))}
+      </div>
     </>
   );
 }
