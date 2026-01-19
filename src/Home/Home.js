@@ -6,11 +6,9 @@ function Home() {
   const [songs, setSongs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // ✅ 페이지 고정
   const pageSize = 50;
   const totalPages = 4;
 
-  // ✅ iTunes RSS에서 데이터 한 번만 가져오기
   const getTopSongs = async () => {
     setLoading(true);
     try {
@@ -18,7 +16,6 @@ function Home() {
         "https://itunes.apple.com/us/rss/topsongs/limit=50/json"
       );
 
-      // feed.entry = 배열 (Top 50)
       setSongs(res.data.feed.entry);
     } catch (e) {
       console.error(e);
@@ -32,7 +29,6 @@ function Home() {
     getTopSongs();
   }, []);
 
-  // ✅ 현재 페이지에 보여줄 곡 계산
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
 
