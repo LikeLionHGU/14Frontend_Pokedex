@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+/*제목용 폰트*/
+
+
+body {/*기본 구조: 멜론 차트 코드(f12)에서 따옴+필요없는코드후에삭제*/
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: "맑은 고딕", "Malgun Gothic", "돋움", "Apple Gothic", helvetica  helvetica,  'Segoe UI', 'Noto Music', sans-serif;
+    letter-spacing: 0;
+    font-size: 12px;
+    color: #666;
+    line-height: 18px;
+    background: #fff;
+    -webkit-text-size-adjust: none;
+}
+.logo{/*music 글자 적용되는 스타일*/
+    color: #66f109;
+    font-size: 40px; 
+    font-weight: 13900;
+    margin-top: 30px; 
+    margin-bottom: 10px;
+     margin-left: 10px;
+     font-family:'Comfortaa';
+}
+.top{/*탑 문구에 적용되는 스타일*/
+        color: #274d11;
+        margin-top: 30px;
+    margin-left: 15px;
+}
+
+.listStyle {
+    display: white;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}.chartBox{/*노래 한 곡 넣는 박스*/
+ display: flex;   
+ align-items: center;
+ padding: 10px;
+ border-bottom: 2px solid #cdffc5;
+}
+.chartBox:hover {/*박스 마우스 호버*/
+    background-color: #dbffe1;
+}
+.albumCover {/*엘범 이미지 적용 코드*/
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+.rank{
+font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    width: 40px;
+    text-align: center;
+    margin-right: 15px;
+
+
+}
+.songInfo{
+display: flex;
+    flex-direction: column; /*세로*/
+    justify-content: center;
+    overflow: hidden;
+
+}.title{/*곡 제목*/
+font-size: 14px;
+    color: #152909;
+    margin-bottom: 4px;
+    font-weight: bold;     
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+
+}.artist{/*가수 정보*/
+font-size: 12px;
+color: #b5cfb4;
+
+}
+.pageButton{/*페이지 넘기는 버튼 e디자인*/
+    margin-top: 30px;
+
+    background-color: white;
+    border: 1px solid #bfffb0;
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #92b67b;
+}
+.buttonLoc {/*버튼 위치*/
+    text-align: center;
+    margin-top: 30px;
+ margin-bottom: 50px;
+}
+
+
+
+
+/*
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: "맑은 고딕", "Malgun Gothic", "돋움", Dotum, "Apple Gothic", helvetica neue, helvetica, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Music', sans-serif;
+    letter-spacing: 0;
+    font-size: 12px;
+    color: #666;
+    line-height: 18px;
+    background: #fff;
+    -webkit-text-size-adjust: none;
+}
+.listStyle {
+    display: block;
+    margin: 8px;
+}
+
+/*멜론 음원차트 벤치마킹
+ - 흰색   #ffffff
+ -초록색 #8ac463
+
+744x750
+마진: 0
+
+*/
