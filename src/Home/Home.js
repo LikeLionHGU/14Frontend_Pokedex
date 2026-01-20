@@ -2,6 +2,8 @@ import "../hanna_css/style.css";//Css 연결
 import {useEffect,useState} from "react";
 import axios from "axios";
 
+
+
 function Home() {
   const [loading, setLoading] = useState(false);
   const [songs, setSongs] = useState([]);
@@ -41,7 +43,10 @@ function Home() {
 
   
     <> 
+    <button className="reloding">{/*버튼 추가 새로고침용도*/}
     <h1 className="logo">MUSIC</h1>
+    </button>
+
       <h2 className="top">{/*~꼴이던거 탑 꼴로 수정했씁니다!*/}
         {currentPage === 1 && "TOP 50"}
         {currentPage === 2 && "TOP 100"}
@@ -49,11 +54,12 @@ function Home() {
         {currentPage === 4 && "TOP 200"}
       </h2>
 
+
+
       {loading && <p>Loading...</p>}
 
       
        
-
 
 <ul className="listStyle">{/*전체 테마 클래스 네임 선언*/}
   {currentSongs.map((song, index) => (
