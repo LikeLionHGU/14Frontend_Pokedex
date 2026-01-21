@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+
+import "../hanna_css/style.css";//Css 연결
+import {useEffect,useState} from "react";
 import axios from "axios";
+
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -34,33 +37,56 @@ function Home() {
 
   const currentSongs = songs.slice(startIndex, endIndex);
 
+
   return (
-    <>
-      <h2>
-        {currentPage === 1 && "1 ~ 50"}
-        {currentPage === 2 && "51 ~ 100"}
-        {currentPage === 3 && "101 ~ 150"}
-        {currentPage === 4 && "151 ~ 200"}
+
+  
+    <> 
+    <button className="reloding">{/*버튼 추가 새로고침용도*/}
+    <h1 className="logo">MUSIC</h1>
+    </button>
+
+      <h2 className="top">{/*~꼴이던거 탑 꼴로 수정했씁니다!*/}
+        {currentPage === 1 && "TOP 50"}
+        {currentPage === 2 && "TOP 100"}
+        {currentPage === 3 && "TOP 150"}
+        {currentPage === 4 && "TOP 200"}
       </h2>
 
-      {loading && <p>로딩중...</p>}
 
-      <ul>
-        {currentSongs.map((song, index) => (
-          <li key={index}>
-            {startIndex + index + 1}. {song["im:name"].label}
+
+      {loading && <p>Loading...</p>}
+
+      
+       
+
+<ul className="listStyle">{/*전체 테마 클래스 네임 선언*/}
+  {currentSongs.map((song, index) => (
+  <li key={index} className="chartBox">
+  <span className="rank">{startIndex +index + 1}</span>  {/*음원차트순위(내림차)*/}
+    <img className="albumCover" src={song["im:image"][2].label} alt="Album Cover" />{/*음원차트용 이미지 추가로 불러오기+이미지사이즈중간*/ }
+
+      {/*노래 제목/가수*/}
+  <div className="songInfo">
+ <span className="title">{song["im:name"].label}</span>
+      <span className="artist">{song["im:artist"].label}</span>
+           </div>
           </li>
         ))}
       </ul>
+      
+     
 
-      <div>
+
+      <div className="buttonLoc">
         {[1, 2, 3, 4].map((page) => (
-          <button
+          <button className="pageButton"
             key={page}
             onClick={() => setCurrentPage(page)}
             style={{
-              color: page === currentPage ? "red" : "black",
-              fontWeight: page === currentPage ? "bold" : "normal",
+              color: page === currentPage ? "#9deb69" : "#333",
+              fontWeight: page === currentPage ? "normal" : "normal",
+
               marginRight: "5px"
             }}
           >
