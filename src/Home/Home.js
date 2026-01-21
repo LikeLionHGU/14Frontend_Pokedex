@@ -1,7 +1,7 @@
+
 import "../hanna_css/style.css";//Css 연결
 import {useEffect,useState} from "react";
 import axios from "axios";
-
 
 
 function Home() {
@@ -36,7 +36,6 @@ function Home() {
   const endIndex = startIndex + pageSize;
 
   const currentSongs = songs.slice(startIndex, endIndex);
-
 
 
   return (
@@ -87,6 +86,7 @@ function Home() {
             style={{
               color: page === currentPage ? "#9deb69" : "#333",
               fontWeight: page === currentPage ? "normal" : "normal",
+
               marginRight: "5px"
             }}
           >
