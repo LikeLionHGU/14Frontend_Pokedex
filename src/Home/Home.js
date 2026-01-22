@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Login from "../hanna_login/loginpage";//로그인 페이지 연결
 import { useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -60,21 +61,7 @@ function Home() {
   return (
     <>
       
-      <div className="loginLoc">
-          {!isLogin ? (
-            <Login />
-          ) : (
-            <button
-              className="mypageButton"
-              onClick={() => navigate("/mypage")}
-            >
-              마이페이지
-            </button>
-          )}
-      </div>
-      <button className="reloding">{/*버튼 추가 새로고침용도*/}
-      <h1 className="logo">MUSIC</h1>
-      </button>
+      <Header/>
 
       <h2 className="top">
         {currentPage === 1 && "TOP 50"}
