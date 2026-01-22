@@ -1,0 +1,89 @@
+.mypageContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.profileBox {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.profileImg {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileName {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.profileEmail {
+  font-size: 14px;
+  color: #666;
+}
+
+.likeTitle {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.emptyText {
+  color: #999;
+  font-size: 14px;
+}
+
+.likeList {
+  list-style: none;
+  padding: 0;
+}
+
+.likeItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.likeAlbum {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+}
+
+.likeInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.likeSong {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.likeArtist {
+  font-size: 13px;
+  color: #666;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #999;
+}
+
+.removeBtn:hover {
+  color: #ff5555;
+}

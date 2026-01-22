@@ -2,6 +2,7 @@ import "../hanna_css/style.css";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import Login from "../hanna_login/loginpage"; // 로그인 페이지 연결
 
 function Home() {
@@ -11,8 +12,15 @@ function Home() {
   const [favorites, setFavorites] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);//사이드바 코드 추가
 
+
   const pageSize = 50;
   const totalPages = 2;
+
+  const navigate = useNavigate();
+  useEffect(() => {
+  const token = localStorage.getItem("accessToken");
+  setIsLogin(!!token);
+}, []);
 
   const getTopSongs = async () => {
     setLoading(true);
@@ -27,8 +35,9 @@ function Home() {
       setLoading(false);
     }
   };
-  
+
   console.log(process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID);
+
 
   useEffect(() => {
     getTopSongs();
@@ -77,6 +86,9 @@ function Home() {
            <h1 className="logo">MUSIC</h1>
         </button>
       </div>
+
+      <Header/>
+
 
       <h2 className="top">
         {currentPage === 1 && "TOP 50"}
