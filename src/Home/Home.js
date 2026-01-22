@@ -2,7 +2,7 @@
 import "../hanna_css/style.css";//Css 연결
 import {useEffect,useState} from "react";
 import axios from "axios";
-
+import Login from "../hanna_login/loginpage";//로그인 페이지 연결
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -42,6 +42,8 @@ function Home() {
 
   
     <> 
+    <div className="loginLoc">
+         <Login />  </div>
     <button className="reloding">{/*버튼 추가 새로고침용도*/}
     <h1 className="logo">MUSIC</h1>
     </button>
