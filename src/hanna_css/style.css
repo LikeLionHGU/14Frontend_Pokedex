@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap');/*제목용 폰트*/
+/*
+정보 정리
 
+메인 컬러 :#66f109;
+ 폰트 :Fredoka
+*/
 
 body {/*기본 구조: 멜론 차트 코드(f12)에서 따옴+필요없는코드후에삭제*/
     height: 100%;
@@ -198,7 +203,7 @@ cursor: pointer;
     z-index: 1500;
     display: none;
 }
-.shdow.show {
+.shdow.show {/*사이드바 열었을 때 디스플레이 블랙*/
     display: block;
 }
 
@@ -208,7 +213,7 @@ cursor: pointer;
     margin-top: 20px;
 }
 
-.sideMenu li {
+.sideMenu li {/*사이드바 안에 목록*/
     padding: 15px 0;
     border-bottom: 1px solid #eee;
     font-size: 16px;
@@ -217,7 +222,7 @@ cursor: pointer;
     cursor: pointer;
 }
 
-.sidebar-menu li:hover {
+.sidebar-menu li:hover {/*사이드바 목록 호버 적용*/
     color: #66f109;
 }
 .sidebar-login-area {
