@@ -3,6 +3,7 @@ import "./hanna_css/style.css";
 import Home from "./Home/Home"; 
 import Loading from "./hanna_login/loding"; 
 import TestPage from "./hanna_login/testpage"; 
+import MyPage from "./MyPage/MyPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/loading" element={<Loading />} />
+          <Route path="mypage" element={<MyPage/>}/>
         </Routes>
       </BrowserRouter>
     </>

@@ -2,16 +2,27 @@ import "../hanna_css/style.css";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Login from "../hanna_login/loginpage";//로그인 페이지 연결
+import { useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
+
+import Login from "../hanna_login/loginpage"; // 로그인 페이지 연결
 
 function Home() {
   const [loading, setLoading] = useState(false);
   const [songs, setSongs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [favorites, setFavorites] = useState([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);//사이드바 코드 추가
+
 
   const pageSize = 50;
   const totalPages = 2;
+
+//   const navigate = useNavigate();
+//   useEffect(() => {
+//   const token = localStorage.getItem("accessToken");
+//   setIsLogin(!!token);
+// }, []);
 
   const getTopSongs = async () => {
     setLoading(true);
@@ -26,7 +37,9 @@ function Home() {
       setLoading(false);
     }
   };
+
   console.log(process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID);
+
 
   useEffect(() => {
     getTopSongs();
@@ -37,7 +50,7 @@ function Home() {
   const toggleFavorite = (songId) => {
     let updated;
     if (favorites.includes(songId)) {
-      updated = favorites.filter(id => id !== songId);
+      updated = favorites.filter((id) => id !== songId);
     } else {
       updated = [...favorites, songId];
     }
@@ -51,12 +64,10 @@ function Home() {
 
   return (
     <>
-      
-      <div className="loginLoc">
-          <Login />  </div>
-      <button className="reloding">{/*버튼 추가 새로고침용도*/}
-      <h1 className="logo">MUSIC</h1>
-      </button>
+    
+
+      <Header/>
+
 
       <h2 className="top">
         {currentPage === 1 && "TOP 50"}
@@ -102,7 +113,7 @@ function Home() {
             style={{
               color: page === currentPage ? "#9deb69" : "#333",
               fontWeight: "normal",
-              marginRight: "5px"
+              marginRight: "5px",
             }}
           >
             {page * 50 - 49}~{page * 50}
