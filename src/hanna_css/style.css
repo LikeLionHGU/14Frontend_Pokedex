@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
-/*제목용 폰트*/
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap');/*제목용 폰트*/
 
 
 body {/*기본 구조: 멜론 차트 코드(f12)에서 따옴+필요없는코드후에삭제*/
@@ -18,12 +17,11 @@ body {/*기본 구조: 멜론 차트 코드(f12)에서 따옴+필요없는코드
 .logo{/*music 글자 적용되는 스타일*/
     color: #66f109;
     font-size: 40px; 
-    font-weight: 13900;
+    font-weight: 550;
     margin-top: 30px; 
     margin-bottom: 10px;
      margin-left: 10px;
-     font-family:'Comfortaa';
-}
+font-family: 'Fredoka', sans-serif;}
 .top{/*탑 문구에 적용되는 스타일*/
         color: #274d11;
         margin-top: 30px;
@@ -43,7 +41,25 @@ body {/*기본 구조: 멜론 차트 코드(f12)에서 따옴+필요없는코드
  border-bottom: 2px solid #cdffc5;
 }
 .chartBox:hover {/*박스 마우스 호버*/
+   
     background-color: #dbffe1;
+
+}
+.chartBox:hover .title{/*제목 호버*/
+    
+    color: #66f109;
+}
+.chartBox:hover .artist{
+    
+    color: #66f109;
+
+}
+.chartBox:hover .rank {
+       
+    color: #66f109;
+}
+.chartBox:hover .albumCover{
+    transform: scale(1.1);
 }
 .albumCover {/*엘범 이미지 적용 코드*/
     width: 60px;
@@ -52,6 +68,7 @@ body {/*기본 구조: 멜론 차트 코드(f12)에서 따옴+필요없는코드
     margin-right: 20px;
     object-fit: cover;
 }
+
 .rank{/*랭킹*/
 font-size: 18px;
     font-weight: bold;
@@ -107,8 +124,23 @@ outline: none;
 background: none;
 cursor: pointer;
 }
-
-
+.loginLoc {/*로그인 버튼위치*/
+    position: absolute; 
+    top: 40px;        
+    right: 20px;     
+    z-index: 999; 
+}
+.loginButton{/*로그인 버튼 스타일*/
+    
+    background-color: #fff;    
+    border: 1px solid #6af80c; 
+    border-radius: 10px;  
+    color: #274d11;  
+    padding: 8px 15px; 
+    font-size: 13px;
+    cursor: pointer; 
+    font-family: 'Fredoka',sans-serif; 
+}
 
 /*
 
