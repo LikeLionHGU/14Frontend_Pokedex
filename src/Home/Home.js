@@ -2,6 +2,8 @@ import "../hanna_css/style.css";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
 
 import Login from "../hanna_login/loginpage"; // 로그인 페이지 연결
 
@@ -16,11 +18,11 @@ function Home() {
   const pageSize = 50;
   const totalPages = 2;
 
-  const navigate = useNavigate();
-  useEffect(() => {
-  const token = localStorage.getItem("accessToken");
-  setIsLogin(!!token);
-}, []);
+//   const navigate = useNavigate();
+//   useEffect(() => {
+//   const token = localStorage.getItem("accessToken");
+//   setIsLogin(!!token);
+// }, []);
 
   const getTopSongs = async () => {
     setLoading(true);
@@ -61,31 +63,8 @@ function Home() {
   const currentSongs = songs.slice(startIndex, endIndex);
 
   return (
-    <> <div 
-        className={`shdow ${isMenuOpen ? "show" : ""}`}  onClick={() => setIsMenuOpen(false)}
-      />{/*사이드바 열었을 때 어둡게*/}
-
-      <div className={`sidebar ${isMenuOpen ? "open" : ""}`}>{/*사이드바*/}
-      
-      <button className="closeButton" onClick={() => setIsMenuOpen(false)}>×</button>{/*사이드바닫기*/}
-      
-        <div className="sidebarLogin"> {/* 로그인 버튼 이동*/}
-            <Login /> 
-        </div>
-        <ul className="sideMenu">
-            <li onClick={() => setIsMenuOpen(false)}>인기차트</li>
-            <li onClick={() => setIsMenuOpen(false)}>마이페이지</li>
-        </ul>{/*사이드바 메뉴*/ }
-      </div>
-
-      <div className="headerBox">  {/*헤더 영역 박스로 묶기(메뉴바+로고)*/}
-        <button className="menuButtton" onClick={() => setIsMenuOpen(true)}>
-      ☰
-        </button>
-        <button className="reloding" onClick={() => window.location.reload()}>{/*로고 버튼에 새로고침기능추가*/}
-           <h1 className="logo">MUSIC</h1>
-        </button>
-      </div>
+    <>
+    
 
       <Header/>
 
