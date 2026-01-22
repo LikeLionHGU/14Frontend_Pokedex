@@ -3,6 +3,7 @@ import "./Home.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Login from "../hanna_login/loginpage";//로그인 페이지 연결
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,7 @@ function Home() {
   const pageSize = 50;
   const totalPages = 2;
 
+  const navigate = useNavigate();
   useEffect(() => {
   const token = localStorage.getItem("accessToken");
   setIsLogin(!!token);
