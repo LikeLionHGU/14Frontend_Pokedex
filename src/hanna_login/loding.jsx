@@ -15,6 +15,13 @@ OAuth 2.0 플로우:
 6. 성공 시 → 테스트 페이지로 이동
 7. 실패 시 → 로그인 페이지로 이동
 */
+const LoginLoading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  margin-top: 100px;
+`;
 
 const Loading = () => {
   const navigate = useNavigate();
@@ -62,10 +69,3 @@ const Loading = () => {
 
 export default Loading;
 
-const LoginLoading = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  margin-top: 100px;
-`;
