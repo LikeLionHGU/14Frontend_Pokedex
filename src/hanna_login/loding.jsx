@@ -47,7 +47,7 @@ const Loading = () => {
         await sendAccessTokenToBackend(code);
         
         // 성공 시 테스트 페이지로 이동
-        navigate("/test");
+        navigate("/");
         
       } catch (error) {
         console.error("로그인 과정에서 에러가 발생했습니다.", error);
