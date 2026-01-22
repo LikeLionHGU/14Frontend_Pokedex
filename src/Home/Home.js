@@ -9,9 +9,15 @@ function Home() {
   const [songs, setSongs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [favorites, setFavorites] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
 
   const pageSize = 50;
   const totalPages = 2;
+
+  useEffect(() => {
+  const token = localStorage.getItem("accessToken");
+  setIsLogin(!!token);
+}, []);
 
   const getTopSongs = async () => {
     setLoading(true);
@@ -26,7 +32,7 @@ function Home() {
       setLoading(false);
     }
   };
-  console.log(process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID);
+
 
   useEffect(() => {
     getTopSongs();
@@ -53,7 +59,17 @@ function Home() {
     <>
       
       <div className="loginLoc">
-          <Login />  </div>
+          {!isLogin ? (
+            <Login />
+          ) : (
+            <button
+              className="mypageButton"
+              onClick={() => navigate("/mypage")}
+            >
+              마이페이지
+            </button>
+          )}
+      </div>
       <button className="reloding">{/*버튼 추가 새로고침용도*/}
       <h1 className="logo">MUSIC</h1>
       </button>
