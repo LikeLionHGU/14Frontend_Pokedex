@@ -1,6 +1,6 @@
-
-import "../hanna_css/style.css";//Css 연결
-import {useEffect,useState} from "react";
+import "../hanna_css/style.css";
+import "./Home.css";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Login from "../hanna_login/loginpage";//로그인 페이지 연결
 
@@ -8,17 +8,17 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [songs, setSongs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [favorites, setFavorites] = useState([]);
 
   const pageSize = 50;
-  const totalPages = 4;
+  const totalPages = 2;
 
   const getTopSongs = async () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        "https://itunes.apple.com/us/rss/topsongs/limit=50/json"
+        "https://itunes.apple.com/us/rss/topsongs/limit=100/json"
       );
-
       setSongs(res.data.feed.entry);
     } catch (e) {
       console.error(e);
@@ -26,69 +26,82 @@ function Home() {
       setLoading(false);
     }
   };
-  console.log("songs length:", songs.length);
+  console.log(process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID);
 
   useEffect(() => {
     getTopSongs();
+    const stored = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(stored);
   }, []);
+
+  const toggleFavorite = (songId) => {
+    let updated;
+    if (favorites.includes(songId)) {
+      updated = favorites.filter(id => id !== songId);
+    } else {
+      updated = [...favorites, songId];
+    }
+    setFavorites(updated);
+    localStorage.setItem("favorites", JSON.stringify(updated));
+  };
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-
   const currentSongs = songs.slice(startIndex, endIndex);
 
-
   return (
+    <>
+      
+      <div className="loginLoc">
+          <Login />  </div>
+      <button className="reloding">{/*버튼 추가 새로고침용도*/}
+      <h1 className="logo">MUSIC</h1>
+      </button>
 
-  
-    <> 
-    <div className="loginLoc">
-         <Login />  </div>
-    <button className="reloding">{/*버튼 추가 새로고침용도*/}
-    <h1 className="logo">MUSIC</h1>
-    </button>
-
-      <h2 className="top">{/*~꼴이던거 탑 꼴로 수정했씁니다!*/}
+      <h2 className="top">
         {currentPage === 1 && "TOP 50"}
         {currentPage === 2 && "TOP 100"}
-        {currentPage === 3 && "TOP 150"}
-        {currentPage === 4 && "TOP 200"}
       </h2>
-
-
 
       {loading && <p>Loading...</p>}
 
-      
-       
+      <ul className="listStyle">
+        {currentSongs.map((song, index) => {
+          const songId = song.id.attributes["im:id"];
+          const isFav = favorites.includes(songId);
 
-<ul className="listStyle">{/*전체 테마 클래스 네임 선언*/}
-  {currentSongs.map((song, index) => (
-  <li key={index} className="chartBox">
-  <span className="rank">{startIndex +index + 1}</span>  {/*음원차트순위(내림차)*/}
-    <img className="albumCover" src={song["im:image"][2].label} alt="Album Cover" />{/*음원차트용 이미지 추가로 불러오기+이미지사이즈중간*/ }
-
-      {/*노래 제목/가수*/}
-  <div className="songInfo">
- <span className="title">{song["im:name"].label}</span>
-      <span className="artist">{song["im:artist"].label}</span>
-           </div>
-          </li>
-        ))}
+          return (
+            <li key={songId} className="chartBox">
+              <span className="rank">{startIndex + index + 1}</span>
+              <img
+                className="albumCover"
+                src={song["im:image"][2].label}
+                alt="Album Cover"
+              />
+              <div className="songInfo">
+                <span className="title">{song["im:name"].label}</span>
+                <span className="artist">{song["im:artist"].label}</span>
+              </div>
+              <button
+                className="starBtn"
+                onClick={() => toggleFavorite(songId)}
+              >
+                {isFav ? "⭐" : "☆"}
+              </button>
+            </li>
+          );
+        })}
       </ul>
-      
-     
-
 
       <div className="buttonLoc">
-        {[1, 2, 3, 4].map((page) => (
-          <button className="pageButton"
+        {[1, 2].map((page) => (
+          <button
+            className="pageButton"
             key={page}
             onClick={() => setCurrentPage(page)}
             style={{
               color: page === currentPage ? "#9deb69" : "#333",
-              fontWeight: page === currentPage ? "normal" : "normal",
-
+              fontWeight: "normal",
               marginRight: "5px"
             }}
           >
