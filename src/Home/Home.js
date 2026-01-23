@@ -11,7 +11,7 @@ function Home() {
   const [favorites, setFavorites] = useState([]);
 
   const pageSize = 50;
-  const totalPages = 2;
+  // const totalPages = 2;
 
   const getTopSongs = async () => {
     setLoading(true);
