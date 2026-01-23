@@ -29,15 +29,22 @@ function Home() {
 
   useEffect(() => {
     getTopSongs();
+    const userInfoStr = localStorage.getItem("userInfo");
+    const userInfo = userInfoStr ? JSON.parse(userInfoStr) : null;
 
-    const userId = localStorage.getItem("userId") || "guest";
+    const userId = userInfo?.id || "guest";
+    console.log(userId);
     const stored =
       JSON.parse(localStorage.getItem(`favorites_${userId}`)) || [];
     setFavorites(stored);
   }, []);
+  
 
   const toggleFavorite = (songId) => {
-    const userId = localStorage.getItem("userId") || "guest";
+    const userInfoStr = localStorage.getItem("userInfo");
+    const userInfo = userInfoStr ? JSON.parse(userInfoStr) : null;
+
+    const userId = userInfo?.id || "guest";
 
     let updated;
     if (favorites.includes(songId)) {
