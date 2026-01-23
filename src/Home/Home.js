@@ -2,27 +2,16 @@ import "../hanna_css/style.css";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
-
-import Login from "../hanna_login/loginpage"; // 로그인 페이지 연결
 
 function Home() {
   const [loading, setLoading] = useState(false);
   const [songs, setSongs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [favorites, setFavorites] = useState([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);//사이드바 코드 추가
-
 
   const pageSize = 50;
   const totalPages = 2;
-
-//   const navigate = useNavigate();
-//   useEffect(() => {
-//   const token = localStorage.getItem("accessToken");
-//   setIsLogin(!!token);
-// }, []);
 
   const getTopSongs = async () => {
     setLoading(true);
@@ -38,24 +27,30 @@ function Home() {
     }
   };
 
-  console.log(process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID);
-
-
   useEffect(() => {
     getTopSongs();
-    const stored = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    const userId = localStorage.getItem("userId") || "guest";
+    const stored =
+      JSON.parse(localStorage.getItem(`favorites_${userId}`)) || [];
     setFavorites(stored);
   }, []);
 
   const toggleFavorite = (songId) => {
+    const userId = localStorage.getItem("userId") || "guest";
+
     let updated;
     if (favorites.includes(songId)) {
       updated = favorites.filter((id) => id !== songId);
     } else {
       updated = [...favorites, songId];
     }
+
     setFavorites(updated);
-    localStorage.setItem("favorites", JSON.stringify(updated));
+    localStorage.setItem(
+      `favorites_${userId}`,
+      JSON.stringify(updated)
+    );
   };
 
   const startIndex = (currentPage - 1) * pageSize;
@@ -64,10 +59,7 @@ function Home() {
 
   return (
     <>
-    
-
-      <Header/>
-
+      <Header />
 
       <h2 className="top">
         {currentPage === 1 && "TOP 50"}

@@ -15,9 +15,9 @@ const sendAccessTokenToBackend = async (code) => {
       console.log("토큰 저장 완료!");
     }
 
-    if (response.data.memberId) {
-       localStorage.setItem("memberId", response.data.memberId);
-      console.log("memberId 저장 완료!");
+    if (response.data.userrId) {
+       localStorage.setItem("userId", response.data.userId);
+      console.log("userId 저장 완료!");
     }
 
     if (response.data.user) {

@@ -1,9 +1,24 @@
 .starBtn {
   background: none;
   border: none;
-  font-size: 22px;
   cursor: pointer;
   margin-left: auto;
-  color: #FFD700; /* 노란색 */
+
+  font-size: 22px;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 0;
+}
+
+.starBtn:hover {
+  transform: scale(1.1);
+}
+.starBtn {
+  color: #f5c518; /* 노란 별 */
 }
