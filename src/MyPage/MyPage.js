@@ -11,7 +11,10 @@ function MyPage() {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     setUser(userInfo);
 
-    const userId = localStorage.getItem("userId") || "guest";
+  
+   
+
+    const userId = userInfo?.id || "guest";
     const favoriteIds =
       JSON.parse(localStorage.getItem(`favorites_${userId}`)) || [];
 
