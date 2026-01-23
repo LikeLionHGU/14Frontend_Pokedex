@@ -59,25 +59,24 @@ font-family: 'Fredoka', sans-serif;}
  border-bottom: 2px solid #cdffc5;
 }
 .chartBox:hover {/*박스 마우스 호버*/
-   
     background-color: #dbffe1;
 
 }
 .chartBox:hover .title{/*제목 호버*/
-    
+
     color: #66f109;
 }
 .chartBox:hover .artist{
-    
+
     color: #66f109;
 
 }
 .chartBox:hover .rank {
-       
+    transform: scale(1.05);
     color: #66f109;
 }
 .chartBox:hover .albumCover{
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 .albumCover {/*엘범 이미지 적용 코드*/
     width: 60px;
