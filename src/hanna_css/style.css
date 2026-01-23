@@ -29,9 +29,21 @@ body {/*기본 구조: 멜론 차트 코드(f12)에서 따옴+필요없는코드
      display: flex;
 font-family: 'Fredoka', sans-serif;}
 .top{/*탑 문구에 적용되는 스타일*/
-        color: #274d11;
-        margin-top: 30px;
-    margin-left: 15px;
+
+    font-family: 'Fredoka', sans-serif;
+    font-size: 20px; 
+    font-weight: 500; 
+
+    color: #286803;  
+
+    margin-top: 30px;     
+    margin-bottom: 20px;   
+    margin-left: 20px;  
+
+
+    display: inline-block; 
+    padding-bottom: 5px;  
+
 }
 
 .listStyle {/*전체 테마*/
@@ -76,7 +88,9 @@ font-family: 'Fredoka', sans-serif;}
 }
 
 .rank{/*랭킹*/
-font-size: 18px;
+    
+    font-family: 'Fredoka', sans-serif;
+    font-size: 18px;
     font-weight: bold;
     color: #333;
     width: 40px;
@@ -86,13 +100,16 @@ font-size: 18px;
 
 }/*노래정보*/
 .songInfo{
-display: flex;
+    
+    display: flex;
     flex-direction:column; /*세로*/
     justify-content:center;
     overflow: hidden;
 
 }.title{/*곡 제목*/
-font-size: 14px;
+
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
     color: #152909;
     margin-bottom: 4px;
     font-weight: bold;     
@@ -102,6 +119,7 @@ font-size: 14px;
 
 
 }.artist{/*가수 정보*/
+font-family: 'Fredoka', sans-serif;
 font-size: 12px;
 color: #b5cfb4;
 
